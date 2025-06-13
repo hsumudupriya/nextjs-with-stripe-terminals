@@ -13,7 +13,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { ChevronRight } from 'lucide-react';
 import { UserInfoErrors } from '@/lib/types';
 
-export const Step1_UserInfo: React.FC = () => {
+export const Step1_UserInfo = () => {
     const { donationData, setDonationData, setStep } = useDonation();
     const [errors, setErrors] = useState<UserInfoErrors>({});
 
