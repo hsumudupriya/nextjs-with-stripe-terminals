@@ -5,13 +5,7 @@
 
 'use client';
 
-import React, {
-    createContext,
-    useState,
-    useContext,
-    ReactNode,
-    FC,
-} from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 import {
     DonationData,
     PaymentStatus,
@@ -19,12 +13,13 @@ import {
     DonationContextType,
 } from '@/lib/types';
 
+type DonationProviderProps = {
+    children: ReactNode;
+};
+
 const DonationContext = createContext<DonationContextType | undefined>(
     undefined
 );
-
-const FAILED_PAYMENT_CHANCE = 0.25; // 25% chance of failure for demo
-
 const initialData: DonationData = {
     fullName: '',
     email: '',
@@ -34,7 +29,7 @@ const initialData: DonationData = {
     coverFee: true,
 };
 
-export const DonationProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export function DonationProvider({ children }: DonationProviderProps) {
     const [step, setStep] = useState<StepId>('userInfo');
     const [donationData, setDonationDataState] =
         useState<DonationData>(initialData);
@@ -55,7 +50,6 @@ export const DonationProvider: FC<{ children: ReactNode }> = ({ children }) => {
         // Simulate backend call
         await new Promise((resolve) => setTimeout(resolve, 3000));
 
-        // const isSuccess = Math.random() > FAILED_PAYMENT_CHANCE;
         const isSuccess = true; // Force success for demo
 
         setPaymentStatus(isSuccess ? 'success' : 'failed');
@@ -91,7 +85,7 @@ export const DonationProvider: FC<{ children: ReactNode }> = ({ children }) => {
             {children}
         </DonationContext.Provider>
     );
-};
+}
 
 export const useDonation = (): DonationContextType => {
     const context = useContext(DonationContext);
