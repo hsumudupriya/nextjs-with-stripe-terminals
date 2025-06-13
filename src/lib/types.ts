@@ -30,6 +30,7 @@ export interface DonationContextType {
     step: StepId;
     donationData: DonationData;
     paymentStatus: PaymentStatus;
+    isProcessing: boolean;
     setStep: (step: StepId) => void;
     setDonationData: (data: Partial<DonationData>) => void;
     processDonation: () => Promise<void>;

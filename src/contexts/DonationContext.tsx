@@ -70,15 +70,15 @@ export const DonationProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     const tryAgain = () => {
-        setStep('processing');
         setPaymentStatus(null);
-        processDonation();
+        setStep('confirmation');
     };
 
     const value = {
         step,
         donationData,
         paymentStatus,
+        isProcessing,
         setStep,
         setDonationData,
         processDonation,

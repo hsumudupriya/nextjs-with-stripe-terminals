@@ -6,13 +6,12 @@
 'use client';
 
 import { DonationProvider, useDonation } from '@/contexts/DonationContext';
-import { Step1_UserInfo } from '@/components/steps/Step1_UserInfo';
 import Image from 'next/image';
-// Import other step components here
-// import { Step2_DonationAmount } from '@/components/steps/Step2_DonationAmount';
-// import { Step3_Confirmation } from '@/components/steps/Step3_Confirmation';
-// import { Step4_Processing } from '@/components/steps/Step4_Processing';
-// import { Step5_Result } from '@/components/steps/Step5_Result';
+import { Step1_UserInfo } from '@/components/steps/Step1_UserInfo';
+import { Step2_DonationAmount } from '@/components/steps/Step2_DonationAmount';
+import { Step3_Confirmation } from '@/components/steps/Step3_Confirmation';
+import { Step4_Processing } from '@/components/steps/Step4_Processing';
+import { Step5_Result } from '@/components/steps/Step5_Result';
 
 const DonationFlowManager: React.FC = () => {
     const { step } = useDonation();
@@ -21,14 +20,14 @@ const DonationFlowManager: React.FC = () => {
         switch (step) {
             case 'userInfo':
                 return <Step1_UserInfo />;
-            // case 'donationAmount':
-            //     return <Step2_DonationAmount />;
-            // case 'confirmation':
-            //     return <Step3_Confirmation />;
-            // case 'processing':
-            //     return <Step4_Processing />;
-            // case 'result':
-            //     return <Step5_Result />;
+            case 'donationAmount':
+                return <Step2_DonationAmount />;
+            case 'confirmation':
+                return <Step3_Confirmation />;
+            case 'processing':
+                return <Step4_Processing />;
+            case 'result':
+                return <Step5_Result />;
             default:
                 return <Step1_UserInfo />;
         }
@@ -36,7 +35,7 @@ const DonationFlowManager: React.FC = () => {
 
     return (
         <div className='bg-gray-50 font-sans flex items-center justify-center min-h-screen p-4'>
-            <div className='w-full max-w-lg mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12 space-y-6 text-center'>
+            <div className='w-full max-w-lg mx-auto bg-white rounded-sm shadow-xl p-8 md:p-12 space-y-6 text-center'>
                 <header className='flex justify-center mb-4'>
                     <div className='flex items-center space-x-3'>
                         <Image
