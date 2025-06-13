@@ -21,7 +21,7 @@ export const Step3_Confirmation: React.FC = () => {
 
     return (
         <div className='space-y-8 flex flex-col items-center'>
-            <h2 className='text-xl md:text-2xl font-semibold text-gray-800'>
+            <h2 className='text-2xl md:text-4xl font-semibold text-gray-800'>
                 Your donation total is:
             </h2>
             <div className='text-5xl md:text-6xl font-bold text-gray-900'>
@@ -35,7 +35,7 @@ export const Step3_Confirmation: React.FC = () => {
             <Button
                 onClick={processDonation}
                 size='lg'
-                className='w-full'
+                className='w-md'
                 disabled={isProcessing}
             >
                 {isProcessing ? (

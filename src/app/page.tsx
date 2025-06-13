@@ -35,21 +35,16 @@ const DonationFlowManager: React.FC = () => {
 
     return (
         <div className='bg-gray-50 font-sans flex items-center justify-center min-h-screen p-4'>
-            <div className='w-full max-w-lg mx-auto bg-white rounded-sm shadow-xl p-8 md:p-12 space-y-6 text-center'>
+            <div className='w-full max-w-5xl mx-auto p-8 md:p-12 space-y-6 text-center'>
                 <header className='flex justify-center mb-4'>
                     <div className='flex items-center space-x-3'>
                         <Image
-                            src='https://logo.clearbit.com/uncf.org'
+                            src='/jtmf-logo.png'
                             alt='Foundation Logo'
-                            className='h-12 w-12 object-contain'
-                            width={48}
-                            height={48}
+                            className='h-10 w-75 object-contain'
+                            width={300}
+                            height={40}
                         />
-                        <span className='font-semibold text-gray-700 text-lg'>
-                            The Joan Trumpauer
-                            <br />
-                            Mulholland Foundation
-                        </span>
                     </div>
                 </header>
                 <div className='transition-all duration-300'>

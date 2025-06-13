@@ -17,14 +17,14 @@ export const Step5_Result: React.FC = () => {
         return (
             <div className='space-y-8 flex flex-col items-center justify-center min-h-[300px] text-center'>
                 <CheckCircle2 className='h-20 w-20 md:h-24 md:w-24 text-green-500' />
-                <h2 className='text-2xl md:text-3xl font-bold text-green-600'>
+                <h2 className='text-2xl md:text-4xl font-bold text-green-600'>
                     Thank you, your transaction was successful!
                 </h2>
                 <Button
                     onClick={resetFlow}
                     variant='outline'
                     size='lg'
-                    className='w-full'
+                    className='w-md'
                 >
                     Return Home
                 </Button>
@@ -36,26 +36,30 @@ export const Step5_Result: React.FC = () => {
         return (
             <div className='space-y-6 flex flex-col items-center justify-center min-h-[300px] text-center'>
                 <XCircle className='h-20 w-20 md:h-24 md:w-24 text-red-500' />
-                <h2 className='text-2xl md:text-3xl font-bold text-red-600'>
+                <h2 className='text-2xl md:text-4xl font-bold text-red-600'>
                     Sorry, your transaction was not successful
                 </h2>
                 <div className='w-full space-y-3'>
-                    <Button
-                        onClick={tryAgain}
-                        variant='primary'
-                        size='lg'
-                        className='w-full'
-                    >
-                        Try Again <ChevronRight className='ml-2 h-5 w-5' />
-                    </Button>
-                    <Button
-                        onClick={resetFlow}
-                        variant='outline'
-                        size='lg'
-                        className='w-full'
-                    >
-                        Return Home
-                    </Button>
+                    <div>
+                        <Button
+                            onClick={tryAgain}
+                            variant='primary'
+                            size='lg'
+                            className='w-md'
+                        >
+                            Try Again <ChevronRight className='ml-2 h-5 w-5' />
+                        </Button>
+                    </div>
+                    <div>
+                        <Button
+                            onClick={resetFlow}
+                            variant='outline'
+                            size='lg'
+                            className='w-md'
+                        >
+                            Return Home
+                        </Button>
+                    </div>
                 </div>
             </div>
         );

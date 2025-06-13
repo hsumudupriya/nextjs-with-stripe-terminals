@@ -43,7 +43,7 @@ export const Step1_UserInfo = () => {
 
     return (
         <form onSubmit={handleSubmit} className='space-y-6 md:space-y-8'>
-            <h2 className='text-xl md:text-2xl font-semibold text-gray-800'>
+            <h2 className='text-2xl md:text-4xl font-semibold text-gray-800'>
                 Thank you for supporting our organization!
             </h2>
             <div className='space-y-4'>
@@ -84,12 +84,12 @@ export const Step1_UserInfo = () => {
                 />
                 <label
                     htmlFor='newsletter'
-                    className='text-sm font-medium leading-none'
+                    className='text-md font-medium leading-none'
                 >
                     Subscribe to newsletter
                 </label>
             </div>
-            <Button type='submit' size='lg' className='w-full'>
+            <Button type='submit' size='lg' className='w-md'>
                 Next <ChevronRight className='ml-2 h-5 w-5' />
             </Button>
         </form>

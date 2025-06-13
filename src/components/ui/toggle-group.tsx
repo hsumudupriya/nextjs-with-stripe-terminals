@@ -29,7 +29,7 @@ const toggleGroupVariants = cva(
 );
 
 const toggleGroupItemVariants = cva(
-    'inline-flex items-center justify-center rounded-sm text-sm font-medium transition-all focus:z-10 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex items-center justify-center rounded-sm text-xl font-medium transition-all focus:z-10 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
     {
         variants: {
             variant: {
@@ -40,7 +40,7 @@ const toggleGroupItemVariants = cva(
             size: {
                 default: 'h-12 px-6',
                 sm: 'h-9 px-3',
-                lg: 'h-11 px-5',
+                lg: 'h-15 px-5',
             },
         },
         defaultVariants: {

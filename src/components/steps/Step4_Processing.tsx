@@ -14,7 +14,7 @@ export const Step4_Processing: React.FC = () => {
             <div className='animate-pulse'>
                 <CreditCard className='h-20 w-20 md:h-24 md:w-24 text-gray-400' />
             </div>
-            <h2 className='text-xl md:text-2xl font-semibold text-gray-800'>
+            <h2 className='text-2xl md:text-4xl font-semibold text-gray-800'>
                 Please follow prompt on card reader
                 <br />
                 to complete transaction.

@@ -42,12 +42,13 @@ export const Step2_DonationAmount: React.FC = () => {
 
     return (
         <div className='space-y-8'>
-            <h2 className='text-xl md:text-2xl font-semibold text-gray-800'>
+            <h2 className='text-2xl md:text-4xl font-semibold text-gray-800'>
                 Choose Your Donation Amount:
             </h2>
             <ToggleGroup
                 type='single'
                 variant='outline'
+                size='lg'
                 className='grid grid-cols-2 sm:grid-cols-4 w-full'
                 value={
                     predefinedAmounts.includes(donationData.amount)
@@ -72,7 +73,7 @@ export const Step2_DonationAmount: React.FC = () => {
                     placeholder='Other Amount'
                     value={customAmount}
                     onChange={handleCustomAmountChange}
-                    className='pl-8 text-base'
+                    className='pl-8'
                 />
             </div>
 
@@ -85,7 +86,7 @@ export const Step2_DonationAmount: React.FC = () => {
                             setDonationData({ isRecurring: !!checked })
                         }
                     />
-                    <label htmlFor='recurring' className='text-sm font-medium'>
+                    <label htmlFor='recurring' className='text-md font-medium'>
                         Monthly recurring donation
                     </label>
                 </div>
@@ -97,7 +98,7 @@ export const Step2_DonationAmount: React.FC = () => {
                             setDonationData({ coverFee: !!checked })
                         }
                     />
-                    <label htmlFor='coverFee' className='text-sm font-medium'>
+                    <label htmlFor='coverFee' className='text-md font-medium'>
                         Cover processing fee (6%)
                     </label>
                 </div>
@@ -106,7 +107,7 @@ export const Step2_DonationAmount: React.FC = () => {
             <Button
                 onClick={() => setStep('confirmation')}
                 size='lg'
-                className='w-full'
+                className='w-md'
                 disabled={!donationData.amount || donationData.amount <= 0}
             >
                 Next <ChevronRight className='ml-2 h-5 w-5' />
