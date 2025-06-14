@@ -9,11 +9,12 @@ import React from 'react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, XCircle, ChevronRight } from 'lucide-react';
+import { PAYMENT_STATUS } from '@/lib/constants';
 
 export const Step5_Result: React.FC = () => {
     const { paymentStatus, resetFlow, tryAgain } = useDonation();
 
-    if (paymentStatus === 'success') {
+    if (paymentStatus === PAYMENT_STATUS.SUCCEEDED) {
         return (
             <div className='space-y-8 flex flex-col items-center justify-center min-h-[300px] text-center'>
                 <CheckCircle2 className='h-20 w-20 md:h-24 md:w-24 text-green-500' />
@@ -32,7 +33,7 @@ export const Step5_Result: React.FC = () => {
         );
     }
 
-    if (paymentStatus === 'failed') {
+    if (paymentStatus === PAYMENT_STATUS.FAILED) {
         return (
             <div className='space-y-6 flex flex-col items-center justify-center min-h-[300px] text-center'>
                 <XCircle className='h-20 w-20 md:h-24 md:w-24 text-red-500' />

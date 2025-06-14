@@ -3,6 +3,8 @@
 // DESC: Central location for all TypeScript types used in the application.
 // ==============================================================================
 
+import { PAYMENT_STATUS } from './constants';
+
 export type DonationData = {
     fullName: string;
     email: string;
@@ -12,7 +14,8 @@ export type DonationData = {
     coverFee: boolean;
 };
 
-export type PaymentStatus = 'success' | 'failed' | null;
+export type PaymentStatus =
+    (typeof PAYMENT_STATUS)[keyof typeof PAYMENT_STATUS];
 
 export type StepId =
     | 'userInfo'

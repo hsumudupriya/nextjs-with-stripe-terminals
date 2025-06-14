@@ -24,7 +24,11 @@ export const Step1_UserInfo = () => {
             newErrors.fullName = 'Full name is required.';
         if (!donationData.email) {
             newErrors.email = 'Email is required.';
-        } else if (!/\S+@\S+\.\S+/.test(donationData.email)) {
+        } else if (
+            !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                donationData.email
+            )
+        ) {
             newErrors.email = 'Email address is invalid.';
         }
 
