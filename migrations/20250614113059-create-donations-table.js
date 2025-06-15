@@ -42,6 +42,11 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
+            amountReceived: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+            },
             stripePaymentIntentId: {
                 type: Sequelize.STRING,
                 allowNull: true,

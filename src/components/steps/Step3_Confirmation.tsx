@@ -9,13 +9,14 @@ import React, { useMemo } from 'react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import { PAYMENT_FEE_RATE } from '@/lib/constants';
 
 export const Step3_Confirmation: React.FC = () => {
     const { donationData, processDonation, isProcessing } = useDonation();
 
     const finalAmount = useMemo(() => {
         return donationData.coverFee
-            ? donationData.amount * 1.06
+            ? donationData.amount * (1 + PAYMENT_FEE_RATE)
             : donationData.amount;
     }, [donationData.amount, donationData.coverFee]);
 

@@ -3,19 +3,22 @@
 // DESC: Central location for all TypeScript types used in the application.
 // ==============================================================================
 
-import { PAYMENT_STATUS } from './constants';
+import { DONATION_STATUS } from './constants';
 
 export type DonationData = {
+    id: string | null;
     fullName: string;
     email: string;
     newsletter: boolean;
     amount: number;
+    amountReceived: number;
     isRecurring: boolean;
     coverFee: boolean;
+    stripePaymentIntentId?: string | null;
 };
 
-export type PaymentStatus =
-    (typeof PAYMENT_STATUS)[keyof typeof PAYMENT_STATUS];
+export type DonationStatus =
+    (typeof DONATION_STATUS)[keyof typeof DONATION_STATUS];
 
 export type StepId =
     | 'userInfo'
@@ -32,11 +35,13 @@ export type UserInfoErrors = {
 export interface DonationContextType {
     step: StepId;
     donationData: DonationData;
-    paymentStatus: PaymentStatus;
+    paymentStatus: DonationStatus;
     isProcessing: boolean;
+    isCapturing: boolean;
     setStep: (step: StepId) => void;
     setDonationData: (data: Partial<DonationData>) => void;
     processDonation: () => Promise<void>;
+    captureDonation: () => Promise<void>;
     resetFlow: () => void;
     tryAgain: () => void;
 }

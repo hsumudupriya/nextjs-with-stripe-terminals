@@ -6,9 +6,13 @@
 'use client';
 
 import React from 'react';
-import { CreditCard } from 'lucide-react';
+import { CreditCard, Loader2 } from 'lucide-react';
+import { useDonation } from '@/contexts/DonationContext';
+import { Button } from '../ui/button';
 
 export const Step4_Processing: React.FC = () => {
+    const { isProcessing, isCapturing, captureDonation } = useDonation();
+
     return (
         <div className='space-y-8 flex flex-col items-center justify-center min-h-[300px] text-center'>
             <div className='animate-pulse'>
@@ -19,6 +23,23 @@ export const Step4_Processing: React.FC = () => {
                 <br />
                 to complete transaction.
             </h2>
+            <Button
+                onClick={captureDonation}
+                size='lg'
+                className='w-md'
+                disabled={isProcessing || isCapturing}
+            >
+                {isProcessing || isCapturing ? (
+                    <>
+                        <Loader2 className='mr-2 h-5 w-5 animate-spin' />
+                        {isProcessing
+                            ? 'Wait for Processing...'
+                            : 'Wait for Capturing...'}
+                    </>
+                ) : (
+                    'Capture Donation >'
+                )}
+            </Button>
         </div>
     );
 };
