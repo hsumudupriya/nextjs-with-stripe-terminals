@@ -152,7 +152,7 @@ export function DonationProvider({ children }: DonationProviderProps) {
     };
 
     const tryAgain = () => {
-        setStep('processing');
+        setStep('confirmation');
     };
 
     const value = {

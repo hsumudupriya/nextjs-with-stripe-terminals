@@ -14,6 +14,7 @@ export const PAYMENT_FEE_RATE = 0.06;
 
 export const STRIPE_PAYMENT_INTENT_STATUS = {
     SUCCEEDED: 'succeeded',
+    CANCELED: 'canceled',
 } as const;
 
 export const STRIPE_READER_ACTION_TYPE = {

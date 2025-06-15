@@ -5,7 +5,11 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Donation from '@/models/donation';
-import { PAYMENT_FEE_RATE, DONATION_STATUS } from '@/lib/constants';
+import {
+    PAYMENT_FEE_RATE,
+    DONATION_STATUS,
+    STRIPE_PAYMENT_INTENT_STATUS,
+} from '@/lib/constants';
 import { stripe } from '@/lib/stripe';
 
 export default async function handler(
@@ -18,8 +22,16 @@ export default async function handler(
     }
 
     try {
-        const { fullName, email, newsletter, amount, isRecurring, coverFee } =
-            req.body;
+        const {
+            id,
+            fullName,
+            email,
+            newsletter,
+            amount,
+            isRecurring,
+            coverFee,
+            stripePaymentIntentId,
+        } = req.body;
 
         if (!fullName || !email || !amount) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -35,34 +47,52 @@ export default async function handler(
         const finalAmountInCents = coverFee
             ? baseAmountInCents + feeAmountInCents
             : baseAmountInCents;
-
+        let paymentIntent: Stripe.PaymentIntent;
         // For recurring payments, we need to save the payment method for future use.
         const setupFutureUsage = isRecurring ? 'off_session' : undefined;
+        let donation: Donation | null = null;
 
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: finalAmountInCents,
-            currency: 'usd',
-            payment_method_types: ['card_present'],
-            setup_future_usage: setupFutureUsage,
-            capture_method: 'manual',
-            receipt_email: email,
-            description: `Donation to ${process.env
-                .FOUNDATION_NAME!} - ${fullName}`,
-        });
+        if (stripePaymentIntentId) {
+            paymentIntent = await stripe.paymentIntents.retrieve(
+                stripePaymentIntentId
+            );
+        }
 
-        const donation = await Donation.create({
-            fullName,
-            email,
-            newsletter,
-            amount: baseAmountInCents,
-            feeAmount: feeAmountInCents,
-            isRecurring,
-            coverFee,
-            finalAmount: finalAmountInCents,
-            amountReceived: 0, // Initially 0 until payment is captured
-            stripePaymentIntentId: paymentIntent.id,
-            status: DONATION_STATUS.PENDING,
-        });
+        if (
+            !stripePaymentIntentId ||
+            paymentIntent.status === STRIPE_PAYMENT_INTENT_STATUS.CANCELED
+        ) {
+            paymentIntent = await stripe.paymentIntents.create({
+                amount: finalAmountInCents,
+                currency: 'usd',
+                payment_method_types: ['card_present'],
+                setup_future_usage: setupFutureUsage,
+                capture_method: 'manual',
+                receipt_email: email,
+                description: `Donation to ${process.env
+                    .FOUNDATION_NAME!} - ${fullName}`,
+            });
+        }
+
+        if (id) {
+            donation = await Donation.findByPk(id);
+        }
+
+        if (!id || !donation) {
+            donation = await Donation.create({
+                fullName,
+                email,
+                newsletter,
+                amount: baseAmountInCents,
+                feeAmount: feeAmountInCents,
+                isRecurring,
+                coverFee,
+                finalAmount: finalAmountInCents,
+                amountReceived: 0, // Initially 0 until payment is captured
+                stripePaymentIntentId: paymentIntent.id,
+                status: DONATION_STATUS.PENDING,
+            });
+        }
 
         return res.status(201).json(donation);
     } catch (error) {
