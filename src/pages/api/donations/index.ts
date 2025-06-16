@@ -11,6 +11,7 @@ import {
     STRIPE_PAYMENT_INTENT_STATUS,
 } from '@/lib/constants';
 import { stripe } from '@/lib/stripe';
+import Stripe from 'stripe';
 
 export default async function handler(
     req: NextApiRequest,
@@ -47,7 +48,7 @@ export default async function handler(
         const finalAmountInCents = coverFee
             ? baseAmountInCents + feeAmountInCents
             : baseAmountInCents;
-        let paymentIntent: Stripe.PaymentIntent;
+        let paymentIntent: Stripe.PaymentIntent | null = null;
         // For recurring payments, we need to save the payment method for future use.
         const setupFutureUsage = isRecurring ? 'off_session' : undefined;
         let donation: Donation | null = null;
@@ -60,7 +61,8 @@ export default async function handler(
 
         if (
             !stripePaymentIntentId ||
-            paymentIntent.status === STRIPE_PAYMENT_INTENT_STATUS.CANCELED
+            (paymentIntent &&
+                paymentIntent.status === STRIPE_PAYMENT_INTENT_STATUS.CANCELED)
         ) {
             paymentIntent = await stripe.paymentIntents.create({
                 amount: finalAmountInCents,
@@ -89,7 +91,7 @@ export default async function handler(
                 coverFee,
                 finalAmount: finalAmountInCents,
                 amountReceived: 0, // Initially 0 until payment is captured
-                stripePaymentIntentId: paymentIntent.id,
+                stripePaymentIntentId: paymentIntent?.id,
                 status: DONATION_STATUS.PENDING,
             });
         }
