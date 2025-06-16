@@ -16,11 +16,7 @@
         "dialect": "mysql"
     },
     "production": {
-        "username": "root",
-        "password": "password",
-        "database": "jtmf_db",
-        "host": "127.0.0.1",
-        "port": 33063,
+        "use_env_variable": "DATABASE_URL",
         "dialect": "mysql"
     }
 }
