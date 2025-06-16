@@ -3,7 +3,7 @@
 // DESC: Initializes the Sequelize instance for use in the application.
 // ==============================================================================
 
-import { Sequelize } from 'sequelize';
+import { Dialect, Sequelize } from 'sequelize';
 
 const sequelize = new Sequelize(
     process.env.DB_NAME!,
@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
     process.env.DB_PASS!,
     {
         host: process.env.DB_HOST!,
-        dialect: 'mysql',
+        dialect: process.env.DB_DIALECT! as Dialect,
         port: Number(process.env.DB_PORT) || 3306,
     }
 );
