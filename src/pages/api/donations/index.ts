@@ -61,8 +61,7 @@ export default async function handler(
 
         if (
             !stripePaymentIntentId ||
-            (paymentIntent &&
-                paymentIntent.status === STRIPE_PAYMENT_INTENT_STATUS.CANCELED)
+            paymentIntent?.status === STRIPE_PAYMENT_INTENT_STATUS.CANCELED
         ) {
             paymentIntent = await stripe.paymentIntents.create({
                 amount: finalAmountInCents,
