@@ -11,27 +11,31 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const Step2_DonationAmount: React.FC = () => {
-    const { donationData, setDonationData, setStep } = useDonation();
-    const [customAmount, setCustomAmount] = useState<string>('');
     const predefinedAmounts = [1, 3, 5, 10];
+    const { donationData, setDonationData, setStep } = useDonation();
+    const [customAmount, setCustomAmount] = useState<number>(
+        !predefinedAmounts.includes(donationData.amount)
+            ? donationData.amount
+            : 0
+    );
 
     const handleAmountSelect = (value: string) => {
         if (!value) return;
 
         const amount = parseInt(value, 10);
         setDonationData({ amount });
-        setCustomAmount('');
+        setCustomAmount(0);
     };
 
     const handleCustomAmountChange = (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
         const value = e.target.value;
-        setCustomAmount(value);
         const parsedValue = parseFloat(value);
+        setCustomAmount(parsedValue);
 
         if (!isNaN(parsedValue) && parsedValue > 0) {
             setDonationData({ amount: parsedValue });
@@ -71,7 +75,7 @@ export const Step2_DonationAmount: React.FC = () => {
                 <Input
                     type='number'
                     placeholder='Other Amount'
-                    value={customAmount}
+                    value={customAmount || ''}
                     onChange={handleCustomAmountChange}
                     className='pl-8'
                 />
@@ -104,14 +108,26 @@ export const Step2_DonationAmount: React.FC = () => {
                 </div>
             </div>
 
-            <Button
-                onClick={() => setStep('confirmation')}
-                size='lg'
-                className='w-md'
-                disabled={!donationData.amount || donationData.amount <= 0}
-            >
-                Next <ChevronRight className='ml-2 h-5 w-5' />
-            </Button>
+            <div className='mb-4'>
+                <Button
+                    onClick={() => setStep('confirmation')}
+                    size='lg'
+                    className='w-md'
+                    disabled={!donationData.amount || donationData.amount <= 0}
+                >
+                    Next <ChevronRight className='ml-2 h-5 w-5' />
+                </Button>
+            </div>
+            <div>
+                <Button
+                    onClick={() => setStep('userInfo')}
+                    variant='outline'
+                    size='lg'
+                    className='w-md'
+                >
+                    Previous <ChevronLeft className='ml-2 h-5 w-5' />
+                </Button>
+            </div>
         </div>
     );
 };

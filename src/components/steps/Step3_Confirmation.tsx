@@ -8,11 +8,12 @@
 import React, { useMemo } from 'react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import { ChevronLeft, Loader2 } from 'lucide-react';
 import { PAYMENT_FEE_RATE } from '@/lib/constants';
 
 export const Step3_Confirmation: React.FC = () => {
-    const { donationData, processDonation, isProcessing } = useDonation();
+    const { donationData, processDonation, isProcessing, setStep } =
+        useDonation();
 
     const finalAmount = useMemo(() => {
         return donationData.coverFee
@@ -33,21 +34,34 @@ export const Step3_Confirmation: React.FC = () => {
                     </span>
                 )}
             </div>
-            <Button
-                onClick={processDonation}
-                size='lg'
-                className='w-md'
-                disabled={isProcessing}
-            >
-                {isProcessing ? (
-                    <>
-                        <Loader2 className='mr-2 h-5 w-5 animate-spin' />
-                        Processing...
-                    </>
-                ) : (
-                    'Complete Donation >'
-                )}
-            </Button>
+
+            <div className='mb-4'>
+                <Button
+                    onClick={processDonation}
+                    size='lg'
+                    className='w-md'
+                    disabled={isProcessing}
+                >
+                    {isProcessing ? (
+                        <>
+                            <Loader2 className='mr-2 h-5 w-5 animate-spin' />
+                            Processing...
+                        </>
+                    ) : (
+                        'Complete Donation >'
+                    )}
+                </Button>
+            </div>
+            <div>
+                <Button
+                    onClick={() => setStep('donationAmount')}
+                    variant='outline'
+                    size='lg'
+                    className='w-md'
+                >
+                    Previous <ChevronLeft className='ml-2 h-5 w-5' />
+                </Button>
+            </div>
         </div>
     );
 };
