@@ -57,6 +57,7 @@ export const Step5_Result: React.FC = () => {
                             variant='outline'
                             size='lg'
                             className='w-md'
+                            disabled={isResetting}
                         >
                             {isResetting ? (
                                 <>

@@ -42,7 +42,7 @@ export interface DonationContextType {
     setStep: (step: StepId) => void;
     setDonationData: (data: Partial<DonationData>) => void;
     processDonation: () => Promise<void>;
-    captureDonation: () => Promise<void>;
+    captureDonation: (isPolling: boolean) => Promise<void | boolean>;
     resetFlow: () => void;
     tryAgain: () => void;
 }

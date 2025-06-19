@@ -111,7 +111,7 @@ export function DonationProvider({ children }: DonationProviderProps) {
         }
     };
 
-    const captureDonation = async () => {
+    const captureDonation = async (isPolling: boolean = false) => {
         if (isCapturing) return;
         setIsCapturing(true);
 
@@ -137,11 +137,17 @@ export function DonationProvider({ children }: DonationProviderProps) {
                     ? DONATION_STATUS.SUCCEEDED
                     : DONATION_STATUS.FAILED
             );
+
+            if (isPolling) {
+                return result.status === DONATION_STATUS.SUCCEEDED
+                    ? true
+                    : false;
+            }
         } catch (error) {
             console.error(error);
             setPaymentStatus(DONATION_STATUS.FAILED);
         } finally {
-            setStep('result');
+            if (!isPolling) setStep('result');
             setIsCapturing(false);
         }
     };
@@ -168,6 +174,9 @@ export function DonationProvider({ children }: DonationProviderProps) {
 
             setPaymentStatus(DONATION_STATUS.PENDING);
             setDonationDataState(initialData);
+            setIsProcessing(false);
+            setIsCapturing(false);
+            setIsResetting(false);
             setStep('userInfo');
         } catch (error) {
             console.error(error);

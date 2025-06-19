@@ -133,8 +133,15 @@ export default async function handler(
         console.error('Error processing the payment:', error);
         const errorMessage =
             error instanceof Error ? error.message : 'Internal server error';
+        const statusCode =
+            typeof error === 'object' &&
+            error !== null &&
+            'code' in error &&
+            error?.code === 'payment_intent_unexpected_state'
+                ? 400
+                : 500;
 
-        return res.status(500).json({
+        return res.status(statusCode).json({
             error: errorMessage,
         });
     } finally {
@@ -142,11 +149,13 @@ export default async function handler(
             `Processed donation ${donation.id} with status ${donation.status}`
         );
 
-        await donation.update({
-            amountReceived,
-            status: finalStatus,
-            stripeSubscriptionId,
-            stripeCustomerId,
-        });
+        if (donation.status !== DONATION_STATUS.SUCCEEDED) {
+            await donation.update({
+                amountReceived,
+                status: finalStatus,
+                stripeSubscriptionId,
+                stripeCustomerId,
+            });
+        }
     }
 }

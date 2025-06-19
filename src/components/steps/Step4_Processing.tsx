@@ -5,19 +5,43 @@
 
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CreditCard, Loader2 } from 'lucide-react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '../ui/button';
 
 export const Step4_Processing: React.FC = () => {
-    const {
-        isProcessing,
-        isCapturing,
-        isResetting,
-        captureDonation,
-        resetFlow,
-    } = useDonation();
+    const { donationData, isResetting, setStep, captureDonation, resetFlow } =
+        useDonation();
+    const pollingInterval = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        const pollStatus = async () => {
+            if (!donationData.stripePaymentIntentId) return;
+
+            try {
+                if (await captureDonation(true)) {
+                    setStep('result');
+                }
+            } catch (error) {
+                console.error('Polling error:', error);
+
+                if (pollingInterval.current) {
+                    clearInterval(pollingInterval.current);
+                }
+            }
+        };
+
+        // Start polling every 3 seconds (3000 milliseconds)
+        pollingInterval.current = setInterval(pollStatus, 3000);
+
+        // Cleanup function: this runs when the component is unmounted
+        return () => {
+            if (pollingInterval.current) {
+                clearInterval(pollingInterval.current);
+            }
+        };
+    }, [donationData.stripePaymentIntentId, setStep, captureDonation]);
 
     return (
         <div className='space-y-8 flex flex-col items-center justify-center min-h-[300px] text-center'>
@@ -29,43 +53,22 @@ export const Step4_Processing: React.FC = () => {
                 <br />
                 to complete transaction.
             </h2>
-
-            <div className='mb-4'>
-                <Button
-                    onClick={captureDonation}
-                    size='lg'
-                    className='w-md'
-                    disabled={isProcessing || isCapturing}
-                >
-                    {isProcessing || isCapturing ? (
-                        <>
-                            <Loader2 className='mr-2 h-5 w-5 animate-spin' />
-                            {isProcessing
-                                ? 'Wait for Processing...'
-                                : 'Wait for Capturing...'}
-                        </>
-                    ) : (
-                        'Capture Donation >'
-                    )}
-                </Button>
-            </div>
-            <div>
-                <Button
-                    onClick={resetFlow}
-                    variant='outline'
-                    size='lg'
-                    className='w-md'
-                >
-                    {isProcessing || isCapturing || isResetting ? (
-                        <>
-                            <Loader2 className='mr-2 h-5 w-5 animate-spin' />
-                            {isResetting ? 'Wait for Resetting...' : 'Wait...'}
-                        </>
-                    ) : (
-                        'Cancel Donation <'
-                    )}
-                </Button>
-            </div>
+            <Button
+                onClick={resetFlow}
+                variant='outline'
+                size='lg'
+                className='w-md'
+                disabled={isResetting}
+            >
+                {isResetting ? (
+                    <>
+                        <Loader2 className='mr-2 h-5 w-5 animate-spin' />
+                        Wait for Resetting...
+                    </>
+                ) : (
+                    'Cancel Donation <'
+                )}
+            </Button>
         </div>
     );
 };
