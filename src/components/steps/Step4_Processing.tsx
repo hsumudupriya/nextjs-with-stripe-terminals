@@ -6,13 +6,18 @@
 'use client';
 
 import React from 'react';
-import { ChevronLeft, CreditCard, Loader2 } from 'lucide-react';
+import { CreditCard, Loader2 } from 'lucide-react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '../ui/button';
 
 export const Step4_Processing: React.FC = () => {
-    const { isProcessing, isCapturing, captureDonation, resetFlow } =
-        useDonation();
+    const {
+        isProcessing,
+        isCapturing,
+        isResetting,
+        captureDonation,
+        resetFlow,
+    } = useDonation();
 
     return (
         <div className='space-y-8 flex flex-col items-center justify-center min-h-[300px] text-center'>
@@ -51,7 +56,14 @@ export const Step4_Processing: React.FC = () => {
                     size='lg'
                     className='w-md'
                 >
-                    Cancel Donation <ChevronLeft className='ml-2 h-5 w-5' />
+                    {isProcessing || isCapturing || isResetting ? (
+                        <>
+                            <Loader2 className='mr-2 h-5 w-5 animate-spin' />
+                            {isResetting ? 'Wait for Resetting...' : 'Wait...'}
+                        </>
+                    ) : (
+                        'Cancel Donation <'
+                    )}
                 </Button>
             </div>
         </div>

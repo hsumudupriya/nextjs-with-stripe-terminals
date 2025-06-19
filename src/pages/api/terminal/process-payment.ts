@@ -60,13 +60,13 @@ export default async function handler(
                     },
                 }
             );
-            const readerStatus = reader.action?.status as string;
+            const actionStatus = reader.action?.status as string;
             console.log(
                 'Stripe Reader Object:',
                 JSON.stringify(reader, null, 2)
             );
 
-            if (readerStatus === STRIPE_READER_ACTION_STATUS.FAILED) {
+            if (actionStatus === STRIPE_READER_ACTION_STATUS.FAILED) {
                 console.log('Terminal failed to process the Payment Intent.');
                 donationStatus = DONATION_STATUS.FAILED;
 
@@ -77,11 +77,11 @@ export default async function handler(
 
             return res
                 .status(
-                    readerStatus === STRIPE_READER_ACTION_STATUS.FAILED
+                    actionStatus === STRIPE_READER_ACTION_STATUS.FAILED
                         ? 400
                         : 200
                 )
-                .json({ status: readerStatus });
+                .json({ status: actionStatus });
         } catch (error) {
             console.error('Error processing the payment:', error);
             donationStatus = DONATION_STATUS.FAILED;

@@ -42,6 +42,7 @@ export function DonationProvider({ children }: DonationProviderProps) {
     );
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCapturing, setIsCapturing] = useState(false);
+    const [isResetting, setIsResetting] = useState(false);
 
     const setDonationData = (data: Partial<DonationData>) => {
         setDonationDataState((prev) => ({ ...prev, ...data }));
@@ -145,10 +146,34 @@ export function DonationProvider({ children }: DonationProviderProps) {
         }
     };
 
-    const resetFlow = () => {
-        setStep('userInfo');
-        setPaymentStatus(DONATION_STATUS.PENDING);
-        setDonationDataState(initialData);
+    const resetFlow = async () => {
+        if (isResetting) return;
+        setIsResetting(true);
+
+        try {
+            const response = await fetch('/api/terminal/cancel-action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    paymentIntentId: donationData.stripePaymentIntentId,
+                }),
+            });
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.error || 'Failed to cancel the reader action.'
+                );
+            }
+
+            setPaymentStatus(DONATION_STATUS.PENDING);
+            setDonationDataState(initialData);
+            setStep('userInfo');
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsResetting(false);
+        }
     };
 
     const tryAgain = () => {
@@ -161,6 +186,7 @@ export function DonationProvider({ children }: DonationProviderProps) {
         paymentStatus,
         isProcessing,
         isCapturing,
+        isResetting,
         setStep,
         setDonationData,
         processDonation,

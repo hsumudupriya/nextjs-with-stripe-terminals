@@ -8,11 +8,11 @@
 import React from 'react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, XCircle, ChevronRight } from 'lucide-react';
+import { CheckCircle2, XCircle, ChevronRight, Loader2 } from 'lucide-react';
 import { DONATION_STATUS } from '@/lib/constants';
 
 export const Step5_Result: React.FC = () => {
-    const { paymentStatus, resetFlow, tryAgain } = useDonation();
+    const { paymentStatus, isResetting, resetFlow, tryAgain } = useDonation();
 
     if (paymentStatus === DONATION_STATUS.SUCCEEDED) {
         return (
@@ -58,7 +58,14 @@ export const Step5_Result: React.FC = () => {
                             size='lg'
                             className='w-md'
                         >
-                            Return Home
+                            {isResetting ? (
+                                <>
+                                    <Loader2 className='mr-2 h-5 w-5 animate-spin' />
+                                    Wait for Resetting...
+                                </>
+                            ) : (
+                                'Return Home <'
+                            )}
                         </Button>
                     </div>
                 </div>
