@@ -12,6 +12,7 @@ import { Step2_DonationAmount } from '@/components/steps/Step2_DonationAmount';
 import { Step3_Confirmation } from '@/components/steps/Step3_Confirmation';
 import { Step4_Processing } from '@/components/steps/Step4_Processing';
 import { Step5_Result } from '@/components/steps/Step5_Result';
+import Link from 'next/link';
 
 const DonationFlowManager: React.FC = () => {
     const { step } = useDonation();
@@ -38,13 +39,15 @@ const DonationFlowManager: React.FC = () => {
             <div className='w-full max-w-5xl mx-auto p-8 md:p-12 space-y-6 text-center'>
                 <header className='flex justify-center mb-4'>
                     <div className='flex items-center space-x-3'>
-                        <Image
-                            src='/jtmf-logo.png'
-                            alt='Foundation Logo'
-                            className='h-10 w-75 object-contain'
-                            width={300}
-                            height={40}
-                        />
+                        <Link href={'https://joantrumpauermulholland.org/'}>
+                            <Image
+                                src='/jtmf-logo.png'
+                                alt='Foundation Logo'
+                                className='h-10 w-75 object-contain'
+                                width={300}
+                                height={40}
+                            />
+                        </Link>
                     </div>
                 </header>
                 <div className='transition-all duration-300'>
