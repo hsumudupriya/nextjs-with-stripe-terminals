@@ -166,7 +166,10 @@ export function DonationProvider({ children }: DonationProviderProps) {
             });
             const result = await response.json();
 
-            if (!response.ok) {
+            if (
+                !response.ok &&
+                !result.error.includes('Reader is currently offline')
+            ) {
                 throw new Error(
                     result.error || 'Failed to cancel the reader action.'
                 );
