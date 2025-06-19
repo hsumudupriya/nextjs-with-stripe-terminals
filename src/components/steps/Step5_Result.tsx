@@ -5,7 +5,7 @@
 
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, XCircle, ChevronRight, Loader2 } from 'lucide-react';
@@ -13,6 +13,18 @@ import { DONATION_STATUS } from '@/lib/constants';
 
 export const Step5_Result: React.FC = () => {
     const { paymentStatus, isResetting, resetFlow, tryAgain } = useDonation();
+
+    useEffect(() => {
+        // Only set the timer if the payment was successful
+        if (paymentStatus === DONATION_STATUS.SUCCEEDED) {
+            const timer = setTimeout(() => {
+                resetFlow();
+            }, 6000);
+
+            // Cleanup function: clear the timer if the component unmounts
+            return () => clearTimeout(timer);
+        }
+    }, [paymentStatus, resetFlow]); // Dependency array ensures effect runs when paymentStatus changes
 
     if (paymentStatus === DONATION_STATUS.SUCCEEDED) {
         return (
