@@ -24,8 +24,11 @@ export const Step3_Confirmation: React.FC = () => {
     return (
         <div className='space-y-8 flex flex-col items-center'>
             <h2 className='text-2xl md:text-4xl font-semibold text-gray-800'>
-                Your donation total is:
+                Your donation details are:
             </h2>
+            <div className='text-xl md:text-2xl font-semibold text-gray-900'>
+                {`${donationData.fullName} (${donationData.email})`}
+            </div>
             <div className='text-5xl md:text-6xl font-bold text-gray-900'>
                 ${finalAmount.toFixed(2)}
                 {donationData.isRecurring && (

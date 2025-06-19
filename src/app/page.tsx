@@ -37,7 +37,7 @@ const DonationFlowManager: React.FC = () => {
     return (
         <div className='bg-gray-50 font-sans flex items-center justify-center min-h-screen p-4'>
             <div className='w-full max-w-5xl mx-auto p-8 md:p-12 space-y-6 text-center'>
-                <header className='flex justify-center mb-4'>
+                <header className='flex justify-center mb-6'>
                     <div className='flex items-center space-x-3'>
                         <Link href={'https://joantrumpauermulholland.org/'}>
                             <Image
