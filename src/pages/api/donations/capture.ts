@@ -92,7 +92,7 @@ export default async function handler(
             } else {
                 customer = await stripe.customers.create({
                     email: donation.email,
-                    name: donation.fullName,
+                    name: `${donation.firstName} ${donation.lastName}`,
                     payment_method: reusablePaymentMethodId,
                     invoice_settings: {
                         default_payment_method: reusablePaymentMethodId,
