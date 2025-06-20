@@ -42,7 +42,6 @@ export const Step3_Confirmation: React.FC = () => {
                 <Button
                     onClick={processDonation}
                     size='lg'
-                    className='w-md'
                     disabled={isProcessing}
                 >
                     {isProcessing ? (
@@ -60,7 +59,6 @@ export const Step3_Confirmation: React.FC = () => {
                     onClick={() => setStep('donationAmount')}
                     variant='outline'
                     size='lg'
-                    className='w-md'
                 >
                     Previous <ChevronLeft className='ml-2 h-5 w-5' />
                 </Button>

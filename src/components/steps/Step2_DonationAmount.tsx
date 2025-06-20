@@ -112,7 +112,6 @@ export const Step2_DonationAmount: React.FC = () => {
                 <Button
                     onClick={() => setStep('confirmation')}
                     size='lg'
-                    className='w-md'
                     disabled={!donationData.amount || donationData.amount <= 0}
                 >
                     Next <ChevronRight className='ml-2 h-5 w-5' />
@@ -123,7 +122,6 @@ export const Step2_DonationAmount: React.FC = () => {
                     onClick={() => setStep('userInfo')}
                     variant='outline'
                     size='lg'
-                    className='w-md'
                 >
                     Previous <ChevronLeft className='ml-2 h-5 w-5' />
                 </Button>

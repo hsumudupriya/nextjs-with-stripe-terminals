@@ -57,7 +57,6 @@ export const Step4_Processing: React.FC = () => {
                 onClick={resetFlow}
                 variant='outline'
                 size='lg'
-                className='w-md'
                 disabled={isResetting}
             >
                 {isResetting ? (

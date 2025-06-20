@@ -33,12 +33,7 @@ export const Step5_Result: React.FC = () => {
                 <h2 className='text-2xl md:text-4xl font-bold text-green-600'>
                     Thank you, your transaction was successful!
                 </h2>
-                <Button
-                    onClick={resetFlow}
-                    variant='outline'
-                    size='lg'
-                    className='w-md'
-                >
+                <Button onClick={resetFlow} variant='outline' size='lg'>
                     Return Home
                 </Button>
             </div>
@@ -54,12 +49,7 @@ export const Step5_Result: React.FC = () => {
                 </h2>
                 <div className='w-full space-y-3'>
                     <div>
-                        <Button
-                            onClick={tryAgain}
-                            variant='primary'
-                            size='lg'
-                            className='w-md'
-                        >
+                        <Button onClick={tryAgain} variant='primary' size='lg'>
                             Try Again <ChevronRight className='ml-2 h-5 w-5' />
                         </Button>
                     </div>
@@ -68,7 +58,6 @@ export const Step5_Result: React.FC = () => {
                             onClick={resetFlow}
                             variant='outline'
                             size='lg'
-                            className='w-md'
                             disabled={isResetting}
                         >
                             {isResetting ? (

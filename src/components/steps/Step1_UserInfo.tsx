@@ -93,7 +93,7 @@ export const Step1_UserInfo = () => {
                     Subscribe to newsletter
                 </label>
             </div>
-            <Button type='submit' size='lg' className='w-md'>
+            <Button type='submit' size='lg'>
                 Next <ChevronRight className='ml-2 h-5 w-5' />
             </Button>
         </form>
