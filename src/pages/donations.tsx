@@ -19,7 +19,9 @@ import { Badge } from '@/components/ui/badge';
 // Define the shape of a single donation object for the frontend
 type Donation = {
     id: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
+    newsletter: boolean;
     email: string;
     finalAmount: number;
     isRecurring: boolean;
@@ -67,6 +69,7 @@ const DonationsListPage: NextPage<DonationsListPageProps> = ({ donations }) => {
                                 <TableHead>Date</TableHead>
                                 <TableHead>Full Name</TableHead>
                                 <TableHead>Email</TableHead>
+                                <TableHead>Newsletter</TableHead>
                                 <TableHead className='text-right'>
                                     Amount
                                 </TableHead>
@@ -85,9 +88,23 @@ const DonationsListPage: NextPage<DonationsListPageProps> = ({ donations }) => {
                                             {createdAt.toLocaleTimeString()}
                                         </TableCell>
                                         <TableCell className='font-medium'>
-                                            {donation.fullName}
+                                            {donation.firstName}{' '}
+                                            {donation.lastName}
                                         </TableCell>
                                         <TableCell>{donation.email}</TableCell>
+                                        <TableCell>
+                                            <Badge
+                                                variant={
+                                                    donation.newsletter
+                                                        ? 'success'
+                                                        : 'secondary'
+                                                }
+                                            >
+                                                {donation.newsletter
+                                                    ? 'Subscribed'
+                                                    : 'Not Subscribed'}
+                                            </Badge>
+                                        </TableCell>
                                         <TableCell className='text-right'>
                                             $
                                             {(
