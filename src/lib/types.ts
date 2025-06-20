@@ -7,7 +7,8 @@ import { DONATION_STATUS } from './constants';
 
 export type DonationData = {
     id: string | null;
-    fullName: string;
+    firstName: string;
+    lastName: string;
     email: string;
     newsletter: boolean;
     amount: number;
@@ -28,7 +29,8 @@ export type StepId =
     | 'result';
 
 export type UserInfoErrors = {
-    fullName?: string;
+    firstName?: string;
+    lastName?: string;
     email?: string;
 };
 

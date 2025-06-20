@@ -25,7 +25,8 @@ export default async function handler(
     try {
         const {
             id,
-            fullName,
+            firstName,
+            lastName,
             email,
             newsletter,
             amount,
@@ -34,7 +35,7 @@ export default async function handler(
             stripePaymentIntentId,
         } = req.body;
 
-        if (!fullName || !email || !amount) {
+        if (!firstName || !lastName || !email || !amount) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -71,7 +72,7 @@ export default async function handler(
                 capture_method: 'manual',
                 receipt_email: email,
                 description: `Donation to ${process.env
-                    .FOUNDATION_NAME!} - ${fullName}`,
+                    .FOUNDATION_NAME!} - ${firstName} ${lastName}`,
             });
         }
 
@@ -81,7 +82,8 @@ export default async function handler(
 
         if (!id || !donation) {
             donation = await Donation.create({
-                fullName,
+                firstName,
+                lastName,
                 email,
                 newsletter,
                 amount: baseAmountInCents,

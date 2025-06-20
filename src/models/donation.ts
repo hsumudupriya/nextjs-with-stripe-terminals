@@ -11,7 +11,8 @@ import { DONATION_STATUS } from '@/lib/constants';
 // These are all the attributes in the Donation model
 interface DonationAttributes {
     id: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
     email: string;
     newsletter: boolean;
     amount: number; // Stored in cents
@@ -41,7 +42,8 @@ class Donation
     implements DonationAttributes
 {
     public id!: string;
-    public fullName!: string;
+    public firstName!: string;
+    public lastName!: string;
     public email!: string;
     public newsletter!: boolean;
     public amount!: number;
@@ -67,7 +69,11 @@ Donation.init(
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true,
         },
-        fullName: {
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false,
         },

@@ -23,7 +23,8 @@ const DonationContext = createContext<DonationContextType | undefined>(
 );
 const initialData: DonationData = {
     id: null,
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     newsletter: true,
     amount: 10,

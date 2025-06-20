@@ -20,8 +20,10 @@ export const Step1_UserInfo = () => {
     const validate = () => {
         const newErrors: UserInfoErrors = {};
 
-        if (!donationData.fullName)
-            newErrors.fullName = 'Full name is required.';
+        if (!donationData.firstName)
+            newErrors.firstName = 'First name is required.';
+        if (!donationData.lastName)
+            newErrors.lastName = 'Last name is required.';
         if (!donationData.email) {
             newErrors.email = 'Email is required.';
         } else if (
@@ -53,16 +55,30 @@ export const Step1_UserInfo = () => {
             <div className='space-y-4'>
                 <Input
                     type='text'
-                    placeholder='Enter Your Full Name'
-                    value={donationData.fullName}
+                    placeholder='Enter Your First Name'
+                    value={donationData.firstName}
                     onChange={(e) =>
-                        setDonationData({ fullName: e.target.value })
+                        setDonationData({ firstName: e.target.value })
                     }
-                    className={errors.fullName ? 'border-red-500' : ''}
+                    className={errors.firstName ? 'border-red-500' : ''}
                 />
-                {errors.fullName && (
+                {errors.firstName && (
                     <p className='text-red-500 text-xs text-left'>
-                        {errors.fullName}
+                        {errors.firstName}
+                    </p>
+                )}
+                <Input
+                    type='text'
+                    placeholder='Enter Your Last Name'
+                    value={donationData.lastName}
+                    onChange={(e) =>
+                        setDonationData({ lastName: e.target.value })
+                    }
+                    className={errors.lastName ? 'border-red-500' : ''}
+                />
+                {errors.lastName && (
+                    <p className='text-red-500 text-xs text-left'>
+                        {errors.lastName}
                     </p>
                 )}
                 <Input
