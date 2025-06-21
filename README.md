@@ -40,14 +40,14 @@ Follow these instructions to get the project running on your local machine for d
 
 ### **2. Clone the Repository**
 
-```
-git clone &lt;your-repository-url> \
-cd &lt;project-directory> \
+```shell
+git clone git@github.com:hsumudupriya/nextjs-with-stripe-terminals.git
+cd nextjs-with-stripe-terminals
 ```
 
 ### **3. Install Dependencies**
 
-```
+```shell
 npm install
 ```
 
@@ -55,7 +55,7 @@ npm install
 
 Create a `.env.local` file in the root of your project by copying the example file:
 
-```
+```shell
 cp .env.example .env.local
 ```
 
@@ -81,7 +81,7 @@ STRIPE_TERMINAL_READER_ID=tmr...
 
 You also need a configuration file for the Sequelize CLI. Copy the example:
 
-```
+```shell
 cp config/config.json.example config/config.json
 ```
 
@@ -91,7 +91,7 @@ Open `config/config.json` and update the development section with your local dat
 
 Run the following scripts to create the database in MySQL and apply the table schemas:
 
-```
+```shell
 npm run db:create
 npm run db:migrate
 ```
@@ -100,8 +100,20 @@ npm run db:migrate
 
 You're all set! Start the Next.js development server:
 
-```
+```shell
 npm run dev
+```
+
+### **8. Simulate the card payments on the Stripe terminal**
+
+Make a `POST` request to the `api/test-helpers/terminal/simulate-payment` API endpoint with a test card number to simulate a card payment on the terminal:
+
+```shell
+curl --location 'http://localhost:3000/api/terminal/simulate-payment' \
+--header 'Accept: application/json' \
+--data '{
+    "card": "378282246310005"
+}'
 ```
 
 The application should now be running at http://localhost:3000.
