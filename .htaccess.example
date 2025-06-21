@@ -1,0 +1,9 @@
+# .htaccess in public_html
+RewriteEngine On
+
+# Rewrite requests for the subdirectory to the Node.js app
+# The (.*) captures everything after /app/donate/
+RewriteRule ^app/donate/(.*)$ http://127.0.0.1:3000/$1 [P,L]
+
+# This handles requests to the subdirectory without a trailing slash
+RewriteRule ^app/donate$ http://127.0.0.1:3000/ [P,L]
