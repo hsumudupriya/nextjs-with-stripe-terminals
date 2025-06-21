@@ -71,8 +71,7 @@ export default async function handler(
                 setup_future_usage: setupFutureUsage,
                 capture_method: 'manual',
                 receipt_email: email,
-                description: `Donation to ${process.env
-                    .FOUNDATION_NAME!} - ${firstName} ${lastName}`,
+                description: `Donation to ${process.env.FOUNDATION_NAME!}`,
             });
         }
 
