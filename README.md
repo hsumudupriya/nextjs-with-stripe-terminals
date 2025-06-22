@@ -167,3 +167,29 @@ This requires a custom server file and .htaccess configuration.
 -   **Starting Subscriptions from a Terminal Payment:** To avoid double-charging, the initial terminal payment is treated as the first payment of the subscription. The subscription is then created with a `billing_cycle_anchor` set one month in the future.
 -   **Environment-Specific Configuration:** Using `NODE_ENV` checks and a `use_env_variable` key in `config/config.json` allows the application to adapt its configuration for development, production, and different deployment targets.
 -   **Atomic Deployments:** By including `npm run db:migrate` in the build command on Render, we ensure that the database schema is always in sync with the application code, making deployments safer and more reliable.
+
+## **Pages**
+
+### **Page 1**
+
+![Page 1](https://github.com/hsumudupriya/nextjs-with-stripe-terminals/raw/main/public/images/pages/page_1.jpg 'Page 1')
+
+### **Page 2**
+
+![Page 2](https://github.com/hsumudupriya/nextjs-with-stripe-terminals/raw/main/public/images/pages/page_2.jpg 'Page 2')
+
+### **Page 3**
+
+![Page 3](https://github.com/hsumudupriya/nextjs-with-stripe-terminals/raw/main/public/images/pages/page_3.jpg 'Page 3')
+
+### **Page 4**
+
+![Page 4](https://github.com/hsumudupriya/nextjs-with-stripe-terminals/raw/main/public/images/pages/page_4.jpg 'Page 4')
+
+### **Page 5 - Donation Successful**
+
+![Page 5 - Donation Successful](https://github.com/hsumudupriya/nextjs-with-stripe-terminals/raw/main/public/images/pages/page_5-successful.jpg 'Page 5 - Donation Successful')
+
+### **Page 5 - Donation Failed**
+
+![Page 5 - Donation Failed](https://github.com/hsumudupriya/nextjs-with-stripe-terminals/raw/main/public/images/pages/page_5-failed.jpg 'Page 5 - Donation Failed')
