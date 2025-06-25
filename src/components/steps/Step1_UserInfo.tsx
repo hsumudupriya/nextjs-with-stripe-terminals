@@ -10,7 +10,7 @@ import { useDonation } from '@/contexts/DonationContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { UserInfoErrors } from '@/lib/types';
 
 export const Step1_UserInfo = () => {
@@ -43,7 +43,7 @@ export const Step1_UserInfo = () => {
         e.preventDefault();
 
         if (validate()) {
-            setStep('donationAmount');
+            setStep('confirmation');
         }
     };
 
@@ -109,9 +109,24 @@ export const Step1_UserInfo = () => {
                     Subscribe to newsletter
                 </label>
             </div>
-            <Button type='submit' size='lg'>
-                Next <ChevronRight className='ml-2 h-5 w-5' />
-            </Button>
+            <div className='mb-4'>
+                <Button
+                    type='submit'
+                    size='lg'
+                    disabled={!donationData.amount || donationData.amount <= 0}
+                >
+                    Next <ChevronRight className='ml-2 h-5 w-5' />
+                </Button>
+            </div>
+            <div>
+                <Button
+                    onClick={() => setStep('donationAmount')}
+                    variant='outline'
+                    size='lg'
+                >
+                    Previous <ChevronLeft className='ml-2 h-5 w-5' />
+                </Button>
+            </div>
         </form>
     );
 };

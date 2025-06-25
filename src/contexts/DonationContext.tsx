@@ -35,7 +35,7 @@ const initialData: DonationData = {
 };
 
 export function DonationProvider({ children }: DonationProviderProps) {
-    const [step, setStep] = useState<StepId>('userInfo');
+    const [step, setStep] = useState<StepId>('donationAmount');
     const [donationData, setDonationDataState] =
         useState<DonationData>(initialData);
     const [paymentStatus, setPaymentStatus] = useState<DonationStatus>(
@@ -181,7 +181,7 @@ export function DonationProvider({ children }: DonationProviderProps) {
             setIsProcessing(false);
             setIsCapturing(false);
             setIsResetting(false);
-            setStep('userInfo');
+            setStep('donationAmount');
         } catch (error) {
             console.error(error);
         } finally {

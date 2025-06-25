@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export const Step2_DonationAmount: React.FC = () => {
     const predefinedAmounts = [1, 3, 5, 10];
@@ -47,7 +47,7 @@ export const Step2_DonationAmount: React.FC = () => {
     return (
         <div className='space-y-8'>
             <h2 className='text-2xl md:text-4xl font-semibold text-gray-800'>
-                Choose Your Donation Amount:
+                Donate Today! Choose an amount:
             </h2>
             <ToggleGroup
                 type='single'
@@ -108,24 +108,13 @@ export const Step2_DonationAmount: React.FC = () => {
                 </div>
             </div>
 
-            <div className='mb-4'>
-                <Button
-                    onClick={() => setStep('confirmation')}
-                    size='lg'
-                    disabled={!donationData.amount || donationData.amount <= 0}
-                >
-                    Next <ChevronRight className='ml-2 h-5 w-5' />
-                </Button>
-            </div>
-            <div>
-                <Button
-                    onClick={() => setStep('userInfo')}
-                    variant='outline'
-                    size='lg'
-                >
-                    Previous <ChevronLeft className='ml-2 h-5 w-5' />
-                </Button>
-            </div>
+            <Button
+                onClick={() => setStep('userInfo')}
+                size='lg'
+                disabled={!donationData.amount || donationData.amount <= 0}
+            >
+                Next <ChevronRight className='ml-2 h-5 w-5' />
+            </Button>
         </div>
     );
 };

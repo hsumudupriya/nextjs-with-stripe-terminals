@@ -30,7 +30,7 @@ const DonationFlowManager: React.FC = () => {
             case 'result':
                 return <Step5_Result />;
             default:
-                return <Step1_UserInfo />;
+                return <Step2_DonationAmount />;
         }
     };
 

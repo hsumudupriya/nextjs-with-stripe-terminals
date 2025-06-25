@@ -59,7 +59,7 @@ export const Step3_Confirmation: React.FC = () => {
             </div>
             <div>
                 <Button
-                    onClick={() => setStep('donationAmount')}
+                    onClick={() => setStep('userInfo')}
                     variant='outline'
                     size='lg'
                 >

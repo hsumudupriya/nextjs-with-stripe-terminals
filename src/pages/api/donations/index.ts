@@ -64,6 +64,10 @@ export default async function handler(
             !stripePaymentIntentId ||
             paymentIntent?.status === STRIPE_PAYMENT_INTENT_STATUS.CANCELED
         ) {
+            const paymentIntentDescription = `Donation to ${process.env
+                .FOUNDATION_NAME!} - \$${amount} ${
+                isRecurring ? 'Monthly Recurring' : 'One-Time'
+            }`;
             paymentIntent = await stripe.paymentIntents.create({
                 amount: finalAmountInCents,
                 currency: 'usd',
@@ -71,7 +75,7 @@ export default async function handler(
                 setup_future_usage: setupFutureUsage,
                 capture_method: 'manual',
                 receipt_email: email,
-                description: `Donation to ${process.env.FOUNDATION_NAME!}`,
+                description: paymentIntentDescription,
             });
         }
 
