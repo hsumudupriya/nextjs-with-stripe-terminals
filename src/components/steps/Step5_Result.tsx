@@ -49,8 +49,20 @@ export const Step5_Result: React.FC = () => {
                 </h2>
                 <div className='w-full space-y-3'>
                     <div>
-                        <Button onClick={tryAgain} variant='primary' size='lg'>
-                            Try Again <ChevronRight className='ml-2 h-5 w-5' />
+                        <Button
+                            onClick={tryAgain}
+                            variant='primary'
+                            size='lg'
+                            disabled={isResetting}
+                        >
+                            {isResetting ? (
+                                <>
+                                    <Loader2 className='mr-2 h-5 w-5 animate-spin' />
+                                    Wait...
+                                </>
+                            ) : (
+                                'Try Again <'
+                            )}
                         </Button>
                     </div>
                     <div>
