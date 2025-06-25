@@ -8,7 +8,7 @@
 import React, { useEffect } from 'react';
 import { useDonation } from '@/contexts/DonationContext';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, XCircle, ChevronRight, Loader2 } from 'lucide-react';
+import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { DONATION_STATUS } from '@/lib/constants';
 
 export const Step5_Result: React.FC = () => {
