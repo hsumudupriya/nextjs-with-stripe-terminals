@@ -10,6 +10,7 @@ export type DonationData = {
     firstName: string;
     lastName: string;
     email: string;
+    zipCode: string;
     newsletter: boolean;
     amount: number;
     amountReceived: number;
@@ -32,6 +33,7 @@ export type UserInfoErrors = {
     firstName?: string;
     lastName?: string;
     email?: string;
+    zipCode?: string;
 };
 
 export interface DonationContextType {

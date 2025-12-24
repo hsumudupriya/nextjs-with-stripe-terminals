@@ -34,6 +34,10 @@ export const Step1_UserInfo = () => {
             newErrors.email = 'Email address is invalid.';
         }
 
+        if (!donationData.zipCode) {
+            newErrors.zipCode = 'Zip Code is required.';
+        }
+
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
@@ -91,6 +95,20 @@ export const Step1_UserInfo = () => {
                 {errors.email && (
                     <p className='text-red-500 text-xs text-left'>
                         {errors.email}
+                    </p>
+                )}
+                <Input
+                    type='text'
+                    placeholder='Enter Your Zip Code'
+                    value={donationData.zipCode}
+                    onChange={(e) =>
+                        setDonationData({ zipCode: e.target.value })
+                    }
+                    className={errors.zipCode ? 'border-red-500' : ''}
+                />
+                {errors.zipCode && (
+                    <p className='text-red-500 text-xs text-left'>
+                        {errors.zipCode}
                     </p>
                 )}
             </div>

@@ -28,6 +28,7 @@ export default async function handler(
             firstName,
             lastName,
             email,
+            zipCode,
             newsletter,
             amount,
             isRecurring,
@@ -35,7 +36,7 @@ export default async function handler(
             stripePaymentIntentId,
         } = req.body;
 
-        if (!firstName || !lastName || !email || !amount) {
+        if (!firstName || !lastName || !email || !amount || !zipCode) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -88,6 +89,7 @@ export default async function handler(
                 firstName,
                 lastName,
                 email,
+                zipCode,
                 newsletter,
                 amount: baseAmountInCents,
                 feeAmount: feeAmountInCents,

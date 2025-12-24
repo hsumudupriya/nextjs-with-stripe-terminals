@@ -26,6 +26,7 @@ const initialData: DonationData = {
     firstName: '',
     lastName: '',
     email: '',
+    zipCode: '',
     newsletter: true,
     amount: 10,
     amountReceived: 0,

@@ -23,6 +23,7 @@ type Donation = {
     lastName: string;
     newsletter: boolean;
     email: string;
+    zipCode: string;
     finalAmount: number;
     isRecurring: boolean;
     status: (typeof DONATION_STATUS)[keyof typeof DONATION_STATUS];
@@ -69,6 +70,7 @@ const DonationsListPage: NextPage<DonationsListPageProps> = ({ donations }) => {
                                 <TableHead>Date</TableHead>
                                 <TableHead>Full Name</TableHead>
                                 <TableHead>Email</TableHead>
+                                <TableHead>Zip Code</TableHead>
                                 <TableHead>Newsletter</TableHead>
                                 <TableHead className='text-right'>
                                     Amount
@@ -92,6 +94,7 @@ const DonationsListPage: NextPage<DonationsListPageProps> = ({ donations }) => {
                                             {donation.lastName}
                                         </TableCell>
                                         <TableCell>{donation.email}</TableCell>
+                                        <TableCell>{donation.zipCode || '-'}</TableCell>
                                         <TableCell>
                                             <Badge
                                                 variant={

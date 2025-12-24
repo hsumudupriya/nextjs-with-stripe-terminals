@@ -14,6 +14,7 @@ interface DonationAttributes {
     firstName: string;
     lastName: string;
     email: string;
+    zipCode: string;
     newsletter: boolean;
     amount: number; // Stored in cents
     isRecurring: boolean;
@@ -45,6 +46,7 @@ class Donation
     public firstName!: string;
     public lastName!: string;
     public email!: string;
+    public zipCode!: string;
     public newsletter!: boolean;
     public amount!: number;
     public isRecurring!: boolean;
@@ -83,6 +85,10 @@ Donation.init(
             validate: {
                 isEmail: true,
             },
+        },
+        zipCode: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
         newsletter: {
             type: DataTypes.BOOLEAN,
